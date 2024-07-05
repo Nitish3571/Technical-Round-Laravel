@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="col mb-4 mt-2">
                                 <div class="form-floating form-floating-outline">
-                                    <select class="form-select" id="editCategoryStatus" name="status">
+                                    <select class="form-select" id="status" name="status">
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
@@ -163,7 +163,7 @@
                                 <tr>
                                     <td>${response.categories[i].id}</td>
                                     <td>${response.categories[i].name}</td>
-                                    <td>${response.categories[i].status = 1 ? 'Active' : 'Inactive'}</td>
+                                    <td>${response.categories[i].status == 1 ? 'Active' : 'Inactive'}</td>
                                     <td>
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#editProductModal" onclick="editCategory(${response.categories[i].id})">Edit</button>
                                         <button class="btn btn-danger" onclick="deleteCategory(${response.categories[i].id})">delete</button>
@@ -195,7 +195,7 @@
 
                     $('#id').val(response.id);
                     $('#categoryName').val(response.name);
-                    $('#currentStatus').val(response.status);
+                    $('#status').val(response.status);
 
                     $('#categoryEditModal').modal('show');
                 },

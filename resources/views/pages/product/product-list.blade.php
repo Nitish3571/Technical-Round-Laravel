@@ -138,7 +138,7 @@
                         @csrf
                         <input type="hidden" class="form-control" id="id" name="id">
                         <div class="form-group">
-                            <img id="productImagePreview" src="" alt="Product Image"
+                            <img id="productImagePreview" alt="Product Image"
                                 style="max-width: 200px; max-height: 200px;" />
                         </div>
                         <div class="form-group">
@@ -242,10 +242,7 @@
                 });
             });
 
-
-        });
-
-        function showProduct() {
+            function showProduct() {
             $('#productList').html('');
             $.ajax({
                 url: "{{ route('product-show') }}",
@@ -258,13 +255,13 @@
                                 <tr>
                                     <td>${response.products[i].id}</td>
                                     <td>
-                                        <img id="productImagePreview" src="/img/products/${response.products[i].productImg}" alt="Product Image" style="max-width: 200px; max-height: 200px;" />
+                                        <img id="productImg" src="/img/products/${response.products[i].productImg}" alt="Product Image" style="max-width: 200px; max-height: 200px;" />
                                     </td>
                                     <td>${response.products[i].productImg}</td>
                                     <td>${response.products[i].name}</td>
                                     <td>${response.products[i].price}</td>
                                     <td>${response.products[i].category.name}</td>
-                                    <td>${response.products[i].status = 1 ? 'Active' : 'Inactive'}</td>
+                                    <td>${response.products[i].status == 1 ? 'Active' : 'Inactive'}</td>
                                     <td>
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#editProductModal" onclick="editProduct(${response.products[i].id})">Edit</button>
                                         <button class="btn btn-danger" onclick="deleteProduct(${response.products[i].id})">delete</button>
@@ -287,6 +284,10 @@
 
         showProduct();
 
+        });
+
+
+
         function editProduct(id) {
             $.ajax({
                 url: `{{ url('/product-edit') }}/${id}`,
@@ -296,7 +297,7 @@
                     let imageUrl = `/img/products/${response.product.productImg}`;
                     $('#productImagePreview').attr('src', imageUrl);
 
-                    $('#productImg').val('');
+                    // $('#productImg').val('');
                     $('#id').val(response.product.id);
                     $('#name').val(response.product.name);
                     $('#amt').val(response.product.price);
